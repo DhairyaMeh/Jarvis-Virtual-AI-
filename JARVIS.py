@@ -97,6 +97,30 @@ if __name__ == "__main__":
         elif 'open code' in query:
             codePath = "C:\\Users\\Haris\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
+            
+        elif "weather" in query:
+			
+ 
+			api_key = "Api key"
+			base_url = "http://api.openweathermap.org / data / 2.5 / weather?"
+			speak(" City name ")
+			print("City name : ")
+			city_name = takeCommand()
+			complete_url = base_url + "appid =" + api_key + "&q =" + city_name
+			response = requests.get(complete_url) 
+			x = response.json() 
+			
+			if x["cod"] != "404": 
+				y = x["main"] 
+				current_temperature = y["temp"] 
+				current_pressure = y["pressure"] 
+				current_humidiy = y["humidity"] 
+				z = x["weather"] 
+				weather_description = z[0]["description"] 
+				print(" Temperature (in kelvin unit) = " +str(current_temperature)+"\n atmospheric pressure (in hPa unit) ="+str(current_pressure) +"\n humidity (in percentage) = " +str(current_humidiy) +"\n description = " +str(weather_description)) 
+			
+			else: 
+				speak(" City Not Found ")
 
         elif 'email to me' in query:
             try:
